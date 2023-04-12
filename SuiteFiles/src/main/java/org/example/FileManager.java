@@ -48,20 +48,30 @@ public class FileManager {
 
     public String readText() throws FileNotFoundException {
 
-        String content;
+        StringBuilder content = new StringBuilder();
 
         try {
 
             this.scanner = new Scanner(new FileReader(this.filePath));
-            content = this.scanner.next();
+
+            do {
+
+                content.append(this.scanner.nextLine());
+
+            } while (this.scanner.hasNextLine());
 
         } finally {
 
-            this.scanner.close();
+            if (this.scanner != null) {
+
+                this.scanner.close();
+
+            }
+
 
         }
 
-        return content;
+        return content.toString();
 
     }
 

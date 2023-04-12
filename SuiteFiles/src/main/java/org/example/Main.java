@@ -1,6 +1,7 @@
 package org.example;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -16,7 +17,9 @@ public class Main {
         String path;
         String fileName;
 
+        int byteNumber;
         boolean exit;
+        boolean allDigits;
         char menu;
 
         do {
@@ -29,7 +32,7 @@ public class Main {
                     d. Leer texto de disco y mostrar en pantalla en modo binario
                     e. Escribir 4 números int y escribirlos en fichero binario
                     f. Leer en binario 4 números int desde fichero en disco
-                    
+                                        
                     0. Salir
                     """);
 
@@ -119,26 +122,76 @@ public class Main {
                 fileName = myScanner.nextLine();
                 myScanner = main.fflush(myScanner);
 
+                System.out.println("Escribe el número de bytes a leer");
+                byteNumber = myScanner.nextInt();
+                myScanner = main.fflush(myScanner);
+
                 fileManager = new FileManager(path, fileName);
 
                 try {
 
-                    System.out.println(Arrays.toString(fileManager.readText().getBytes()));
+                    System.out.println(Arrays.toString(fileManager.readBinary(byteNumber)));
                     System.out.println("Se ha completado la operación!");
 
-                } catch (FileNotFoundException e) {
-
+                } catch (IOException e) {
                     System.out.println("No se ha encontrado el archivo '" + fileManager.getFileName() + "' en '" + fileManager.getPath() + "'");
-
                 }
 
             } else if (menu == 'e') {
 
-                System.out.println();
+                do {
+
+                    allDigits = true;
+
+                    System.out.println("Escribe 4 números a escribir a disco (binario)");
+                    content = myScanner.nextLine();
+                    myScanner = main.fflush(myScanner);
+
+                    if (content.length() == 4) {
+
+                        for (int i = 0; i < content.length(); i++) {
+
+                            if (!Character.isDigit(content.charAt(i))) {
+
+                                System.out.println("Introduce 4 números...");
+                                allDigits = false;
+                                break;
+
+                            }
+
+                        }
+
+                    } else {
+
+                        System.out.println("Introduce 4 números...");
+                        allDigits = false;
+
+                    }
+
+                } while (!allDigits);
+
+                System.out.println("Escribe la ruta del archivo");
+                path = myScanner.nextLine();
+                myScanner = main.fflush(myScanner);
+
+                System.out.println("Escribe el nombre del archivo");
+                fileName = myScanner.nextLine();
+                myScanner = main.fflush(myScanner);
+
+                fileManager = new FileManager(path, fileName);
+                if (fileManager.writeBinary(content.getBytes(StandardCharsets.UTF_8))) {
+
+                    System.out.println("Se ha completado la operación!");
+
+                } else {
+
+                    System.out.println("No se ha encontrado el archivo '" + fileName + "' en '" + path + "'");
+
+                }
 
             } else if (menu == 'f') {
 
-                System.out.println("Escribe la ruta del archivo a leer (binario)");
+                System.out.println("Escribe la ruta del archivo a leer 4 números (binario)");
                 path = myScanner.nextLine();
                 myScanner = main.fflush(myScanner);
 
@@ -150,13 +203,11 @@ public class Main {
 
                 try {
 
-                    System.out.println(Arrays.toString(fileManager.readText().getBytes()));
+                    System.out.println(Arrays.toString(fileManager.readBinary(4)));
                     System.out.println("Se ha completado la operación!");
 
-                } catch (FileNotFoundException e) {
-
+                } catch (IOException e) {
                     System.out.println("No se ha encontrado el archivo '" + fileManager.getFileName() + "' en '" + fileManager.getPath() + "'");
-
                 }
 
             } else if (menu == '0') {
