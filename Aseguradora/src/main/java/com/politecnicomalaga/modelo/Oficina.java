@@ -3,7 +3,7 @@ package com.politecnicomalaga.modelo;
 import java.util.LinkedList;
 
 public class Oficina {
-    private int id;
+    private String id;
     private String name;
     private String address;
     private String city;
@@ -13,7 +13,7 @@ public class Oficina {
     private LinkedList<Cliente> clients;
 
     //Constructor
-    public Oficina(int id, String name, String address, String city, String postcode, String phoneNumber, String email) {
+    public Oficina(String id, String name, String address, String city, String postcode, String phoneNumber, String email) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -26,7 +26,7 @@ public class Oficina {
     }
 
     //Setters
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -62,6 +62,7 @@ public class Oficina {
 
             if (client.getDni().equals(newClient.getDni())) {
                 isIn = true;
+                break;
             }
 
         }

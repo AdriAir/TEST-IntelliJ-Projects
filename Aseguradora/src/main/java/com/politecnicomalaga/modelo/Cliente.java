@@ -73,7 +73,7 @@ public class Cliente {
             if (incident.isActive) {
 
                 isRemovable = false;
-
+                break;
             }
 
         }
