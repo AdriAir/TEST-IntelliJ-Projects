@@ -26,6 +26,44 @@ public class Office {
 
         this.clients = new LinkedList<>();
     }
+    public Office(String data) {
+
+        //IMPORT CSV
+        String[] lines = data.split("\n");
+        String[] attributes = data.split(";");
+
+        if (attributes[0].equals("Oficina")) {
+
+            this.id = attributes[1];
+            this.name = attributes[2];
+            this.address = attributes[3];
+            this.city = attributes[4];
+            this.postcode = attributes[5];
+            this.phoneNumber = attributes[6];
+            this.email = attributes[7];
+
+        } else {
+
+            return;
+
+        }
+
+        //Clientes
+
+        this.clients = new LinkedList<>();
+
+        String[] csvClients = data.split("Cliente");
+        String csvClient;
+
+        for (String sClient : csvClients) {
+
+            csvClient = "Cliente" + sClient;
+            Client client = new Client(csvClient);
+            clients.add(client);
+
+        }
+
+    }
 
     //Setters
     public void setId(String id) {
@@ -174,45 +212,6 @@ public class Office {
                 this.postcode,
                 this.phoneNumber,
                 this.email);
-    }
-
-    public Office(String data) {
-
-        //IMPORT CSV
-        String[] lines = data.split("\n");
-        String[] attributes = data.split(";");
-
-        if (attributes[0].equals("Oficina")) {
-
-            this.id = attributes[1];
-            this.name = attributes[2];
-            this.address = attributes[3];
-            this.city = attributes[4];
-            this.postcode = attributes[5];
-            this.phoneNumber = attributes[6];
-            this.email = attributes[7];
-
-        } else {
-
-            return;
-
-        }
-
-        //Clientes
-
-        this.clients = new LinkedList<>();
-
-        String[] csvClients = data.split("Cliente");
-        String csvClient;
-
-        for (int i = 0; i < csvClients.length; i++) {
-
-            csvClient = "Cliente" + csvClients[i];
-            Client client = new Client(csvClient);
-            clients.add(client);
-
-        }
-
     }
 
     public String toCSV() {

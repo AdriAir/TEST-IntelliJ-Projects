@@ -4,7 +4,6 @@ import com.politecnicomalaga.controller.FileController;
 import com.politecnicomalaga.model.Client;
 import com.politecnicomalaga.model.Incident;
 import com.politecnicomalaga.model.Office;
-
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -53,10 +52,9 @@ public class MainLauncher {
 
         //Objects
         Scanner scanner = new Scanner(System.in);
-        Office office;
+        Office office = null;
         Client client;
         Incident incident;
-
 
         //First Start
         do {
@@ -67,18 +65,13 @@ public class MainLauncher {
                     "2. IMPORTAR OFICINA\n" +
                     "---------------------\n" +
                     "Su opción: ");
-
             try {
                 menu = scanner.nextInt();
 
                 if (menu < 1 || menu > 2) {
-
                     System.out.println("Introduzca un valor válido...");
-
                 } else {
-
                     exit = true;
-
                 }
 
             } catch (InputMismatchException inputMismatchException) {
@@ -144,7 +137,6 @@ public class MainLauncher {
                         "3. DESDE XML\n" +
                         "---------------------\n" +
                         "Su opción: ");
-
                 try {
 
                     menu = scanner.nextInt();
@@ -170,27 +162,48 @@ public class MainLauncher {
                 //Import from CSV
                 do {
                     try {
-                        System.out.print("Introuduce la ruta del archivo: ");
+                        System.out.print("Introuduce la ruta del CSV: ");
                         path = scanner.nextLine();
-                        office = new Office(FileController.readText(path));
+                        csv = FileController.readText(path);
+                        office = new Office(csv);
                         System.out.println("Se ha importado la oficina...");
                         exit = true;
                     } catch (IOException ioException) {
                         System.out.println("No se ha encontrado el archivo");
                     }
                 } while (!exit);
-
                 exit = false;
-
             } else if (menu == 2) {
                 //Import from JSON
+                do {
+                    try {
+                        System.out.print("Introuduce la ruta del JSON: ");
+                        path = scanner.nextLine();
+                        json = FileController.readText(path);
+                        office = (Office) FileController.readJson(json, office);
+                        System.out.println("Se ha importado la oficina...");
+                        exit = true;
+                    } catch (IOException ioException) {
+                        System.out.println("No se ha encontrado el archivo");
+                    }
+                } while (!exit);
+                exit = false;
             } else {
                 //Import from XML
+                do {
+                    try {
+                        System.out.print("Introuduce la ruta del XML: ");
+                        path = scanner.nextLine();
+                        xml = FileController.readText(path);
+                        office = (Office) FileController.readXML(xml, office);
+                        System.out.println("Se ha importado la oficina...");
+                        exit = true;
+                    } catch (IOException ioException) {
+                        System.out.println("No se ha encontrado el archivo");
+                    }
+                } while (!exit);
+                exit = false;
             }
-
-            //Oficina temporal, para evitar problemas
-            office = new Office(" ", " ", " ", " ", " ", " ", " ");
-
         }
 
         //Loop del programa
@@ -260,7 +273,6 @@ public class MainLauncher {
                                 clientEmail,
                                 clientPhoneNumber);
 
-                        //QUE????
                         office.addClient(client);
 
                         exit = true;
@@ -497,6 +509,82 @@ public class MainLauncher {
 
                 exit = false;
 
+                //Export Office
+                do {
+                    System.out.print("---------------------\n" +
+                            "EXPORTAR OFICINA\n" +
+                            "---------------------\n" +
+                            "1. EXPORTAR A CSV\n" +
+                            "2. EXPORTAR A JSON\n" +
+                            "3. EXPORTAR A XML\n" +
+                            "---------------------\n" +
+                            "Su opción: ");
+
+                    try {
+
+                        menu = scanner.nextInt();
+
+                        if (menu < 1 || menu > 3) {
+
+                            System.out.println("Introduzca un valor válido...");
+
+                        } else {
+
+                            exit = true;
+
+                        }
+
+                    } catch (InputMismatchException inputMismatchException) {
+                        System.out.println("Porfavor, introduzca un número...");
+                    }
+                } while (!exit);
+
+                exit = false;
+
+                if (menu == 1) {
+                    //Export to CSV
+                    do {
+                        try {
+                            System.out.print("Introuduce la ruta del nuevo archivo: ");
+                            path = scanner.nextLine();
+                            csv = office.toCSV();
+                            FileController.writeText(csv, path);
+                            System.out.println("Se ha exportado la oficina...");
+                            exit = true;
+                        } catch (IOException ioException) {
+                            System.out.println("No se ha encontrado el archivo");
+                        }
+                    } while (!exit);
+                    exit = false;
+                } else if (menu == 2) {
+                    //Export to JSON
+                    do {
+                        try {
+                            System.out.print("Introuduce la ruta del nuevo archivo: ");
+                            path = scanner.nextLine();
+                            FileController.writeJSON(office, path);
+                            System.out.println("Se ha exportado la oficina...");
+                            exit = true;
+                        } catch (IOException ioException) {
+                            System.out.println("No se ha encontrado el archivo");
+                        }
+                    } while (!exit);
+                    exit = false;
+                } else {
+                    //Export to XML
+                    do {
+                        try {
+                            System.out.print("Introuduce la ruta del nuevo archivo: ");
+                            path = scanner.nextLine();
+                            FileController.writeJSON(office, path);
+                            System.out.println("Se ha exportado la oficina...");
+                            exit = true;
+                        } catch (IOException ioException) {
+                            System.out.println("No se ha encontrado el archivo");
+                        }
+                    } while (!exit);
+                    exit = false;
+                }
             }
 
         } while (!exit);

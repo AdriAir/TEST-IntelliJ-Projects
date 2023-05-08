@@ -38,12 +38,12 @@ public class Client {
         this.incidents = new LinkedList<>();
     }
 
-    public Client(String data) {
+    public Client(String csv) {
 
 
         //IMPORT CSV
-        String[] lines = data.split("\n");
-        String[] attributes = data.split(";");
+        String[] lines = csv.split("\n");
+        String[] attributes = csv.split(";");
 
         if (attributes[0].equals("Cliente")) {
 
@@ -62,7 +62,6 @@ public class Client {
         }
 
         //Incidencias
-
         incidents = new LinkedList<>();
 
         for (int i = 1; i < lines.length; i++) {

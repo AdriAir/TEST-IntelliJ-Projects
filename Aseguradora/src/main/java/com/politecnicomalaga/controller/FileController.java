@@ -1,6 +1,9 @@
+//MUST ADD TO GRADLE/MAVEN GSON AND JAXB LIBS
+
 package com.politecnicomalaga.controller;
 
 import com.google.gson.Gson;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -54,21 +57,21 @@ public class FileController {
     }
 
     //XML
-    public static void toXML(Object object, String path) throws JAXBException {
+    public static void writeXML(Object object, String path) throws JAXBException {
         Marshaller marshaller = JAXBContext.newInstance(object.getClass()).createMarshaller();
         marshaller.marshal(object, new File(path));
     }
 
-    public static Object fromXML(String xml, Object object) {
+    public static Object readXML(String xml, Object object) {
         return new Gson().fromJson(xml, object.getClass());
     }
 
     //JSON
-    public static void toJSON(Object object, String path) throws IOException {
+    public static void writeJSON(Object object, String path) throws IOException {
         writeText(new Gson().toJson(object), path);
     }
 
-    public static Object fromJson(String json, Object object) {
+    public static Object readJson(String json, Object object) {
         return new Gson().fromJson(json, object.getClass());
     }
 

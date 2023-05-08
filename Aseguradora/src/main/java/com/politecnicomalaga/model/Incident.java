@@ -29,10 +29,10 @@ public class Incident {
         this.isActive = true;
     }
 
-    public Incident(String data) {
+    public Incident(String csv) {
 
         //IMPORT CSV
-        String[] attributes = data.split(";");
+        String[] attributes = csv.split(";");
 
         if (attributes[0].equals("Incidencia")) {
             this.date = attributes[1];

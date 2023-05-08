@@ -17,11 +17,11 @@ public class ThirdPartyIncident extends Incident {
 
     }
 
-    public ThirdPartyIncident(String data) {
-        super(data);
+    public ThirdPartyIncident(String csv) {
+        super(csv);
 
         //IMPORT CSV
-        String[] attributes = data.split(";");
+        String[] attributes = csv.split(";");
 
         if (attributes[7].equals("Incidencia Ajena")) {
             this.thirdPartyDriverDni = attributes[8];

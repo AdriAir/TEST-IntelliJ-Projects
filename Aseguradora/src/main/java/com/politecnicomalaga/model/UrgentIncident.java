@@ -23,11 +23,11 @@ public class UrgentIncident extends Incident {
 
     }
 
-    public UrgentIncident(String data) {
-        super(data);
+    public UrgentIncident(String csv) {
+        super(csv);
 
         //IMPORT CSV
-        String[] attributes = data.split(";");
+        String[] attributes = csv.split(";");
 
         if (attributes[7].equals("Incidencia Urgente")) {
             this.maxDays = Integer.parseInt(attributes[8]);
