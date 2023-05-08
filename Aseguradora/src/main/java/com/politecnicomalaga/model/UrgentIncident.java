@@ -1,4 +1,4 @@
-package com.politecnicomalaga.modelo;
+package com.politecnicomalaga.model;
 
 public class UrgentIncident extends Incident {
     private int maxDays;
@@ -23,33 +23,14 @@ public class UrgentIncident extends Incident {
 
     }
 
-    public UrgentIncident(int type, String data) {
-        super(type, data);
-        /*
-        type == 1 -> CSV
-        type == 2 -> JSON
-        type == 3 -> XML
-         */
+    public UrgentIncident(String data) {
+        super(data);
 
-        if (type == 1) {
+        //IMPORT CSV
+        String[] attributes = data.split(";");
 
-            //IMPORT CSV
-            String[] attributes = data.split(";");
-
-            if (attributes[0].equals("Incidencia")) {
-                this.maxDays = Integer.parseInt(attributes[7]);
-            }
-
-        } else if (type == 2) {
-
-            //IMPORT JSON
-
-        } else if (type == 3) {
-
-            //IMPORT XML
-
-        } else {
-            throw new IllegalArgumentException("El tipo no es válido...");
+        if (attributes[7].equals("Incidencia Urgente")) {
+            this.maxDays = Integer.parseInt(attributes[8]);
         }
 
     }
@@ -78,13 +59,14 @@ public class UrgentIncident extends Incident {
         String csv;
 
         csv = String.format("Incidencia;" +
-                        "%10s;" +
-                        "%10s;" +
-                        "%10s;" +
-                        "%10s;" +
-                        "%10s;" +
-                        "%20s;" +
-                        "%10s\n",
+                        "%s;" +
+                        "%s;" +
+                        "%s;" +
+                        "%s;" +
+                        "%s;" +
+                        "%s;" +
+                        "Incidencia Urgente;" +
+                        "%s\n",
                 super.date,
                 super.timeHours,
                 super.id,

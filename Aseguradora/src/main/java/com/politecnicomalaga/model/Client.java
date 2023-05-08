@@ -1,4 +1,4 @@
-package com.politecnicomalaga.modelo;
+package com.politecnicomalaga.model;
 
 import java.util.LinkedList;
 
@@ -38,57 +38,38 @@ public class Client {
         this.incidents = new LinkedList<>();
     }
 
-    public Client(int type, String data) {
+    public Client(String data) {
 
-        /*
-        type == 1 -> CSV
-        type == 2 -> JSON
-        type == 3 -> XML
-         */
 
-        if (type == 1) {
+        //IMPORT CSV
+        String[] lines = data.split("\n");
+        String[] attributes = data.split(";");
 
-            //IMPORT CSV
-            String[] lines = data.split("\n");
-            String[] attributes = data.split(";");
+        if (attributes[0].equals("Cliente")) {
 
-            if (attributes[0].equals("Cliente")) {
-
-                this.dni = attributes[1];
-                this.idPolicy = attributes[2];
-                this.name = attributes[3];
-                this.lastName = attributes[4];
-                this.address = attributes[5];
-                this.email = attributes[6];
-                this.phoneNumber = attributes[7];
-
-            } else {
-
-                return;
-
-            }
-
-            //Incidencias
-
-            incidents = new LinkedList<>();
-
-            for (int i = 1; i < lines.length; i++) {
-
-                Incident incident = new Incident(1, lines[i]);
-                this.incidents.add(incident);
-
-            }
-
-        } else if (type == 2) {
-
-            //IMPORT JSON
-
-        } else if (type == 3) {
-
-            //IMPORT XML
+            this.dni = attributes[1];
+            this.idPolicy = attributes[2];
+            this.name = attributes[3];
+            this.lastName = attributes[4];
+            this.address = attributes[5];
+            this.email = attributes[6];
+            this.phoneNumber = attributes[7];
 
         } else {
-            throw new IllegalArgumentException("El tipo no es válido...");
+
+            return;
+
+        }
+
+        //Incidencias
+
+        incidents = new LinkedList<>();
+
+        for (int i = 1; i < lines.length; i++) {
+
+            Incident incident = new Incident(lines[i]);
+            this.incidents.add(incident);
+
         }
 
     }
@@ -237,13 +218,13 @@ public class Client {
         StringBuilder csv;
 
         csv = new StringBuilder(String.format("Cliente;" +
-                        "%10s;" +
-                        "%10s;" +
-                        "%10s;" +
-                        "%10s;" +
-                        "%10s;" +
-                        "%10s;" +
-                        "%10s\n",
+                        "%s;" +
+                        "%s;" +
+                        "%s;" +
+                        "%s;" +
+                        "%s;" +
+                        "%s;" +
+                        "%s\n",
                 this.dni,
                 this.idPolicy,
                 this.name,

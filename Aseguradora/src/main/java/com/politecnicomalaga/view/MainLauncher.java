@@ -1,10 +1,11 @@
-package com.politecnicomalaga;
+package com.politecnicomalaga.view;
 
-import com.politecnicomalaga.modelo.Client;
-import com.politecnicomalaga.modelo.Incident;
-import com.politecnicomalaga.modelo.Office;
-import com.sun.jdi.request.DuplicateRequestException;
+import com.politecnicomalaga.controller.FileController;
+import com.politecnicomalaga.model.Client;
+import com.politecnicomalaga.model.Incident;
+import com.politecnicomalaga.model.Office;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -44,6 +45,11 @@ public class MainLauncher {
         int incidentMaxDays;
         String incidentThirdPartyDriverDni;
 
+        //Files
+        String path;
+        String csv;
+        String json;
+        String xml;
 
         //Objects
         Scanner scanner = new Scanner(System.in);
@@ -162,6 +168,20 @@ public class MainLauncher {
 
             if (menu == 1) {
                 //Import from CSV
+                do {
+                    try {
+                        System.out.print("Introuduce la ruta del archivo: ");
+                        path = scanner.nextLine();
+                        office = new Office(FileController.readText(path));
+                        System.out.println("Se ha importado la oficina...");
+                        exit = true;
+                    } catch (IOException ioException) {
+                        System.out.println("No se ha encontrado el archivo");
+                    }
+                } while (!exit);
+
+                exit = false;
+
             } else if (menu == 2) {
                 //Import from JSON
             } else {
@@ -259,7 +279,6 @@ public class MainLauncher {
             } else if (menu == 2) {
 
                 //VER CLIENTES
-
                 do {
 
                     System.out.print("---------------------\n" +
@@ -334,7 +353,6 @@ public class MainLauncher {
                 } else if (menu == 2) {
 
                     //Buscar Cliente por DNI
-
                     do {
 
                         try {
@@ -366,7 +384,6 @@ public class MainLauncher {
                 } else {
 
                     //Buscar clientes por Apellidos
-
                     do {
 
                         try {
@@ -407,9 +424,7 @@ public class MainLauncher {
                             System.out.println("Introduzca un valor válido...");
 
                         }
-
                     } while (!exit);
-
                 }
 
                 //GESTIONAR CLIENTE

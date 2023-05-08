@@ -1,6 +1,6 @@
-package com.politecnicomalaga.modelo;
+package com.politecnicomalaga.model;
 
-import com.sun.jdi.request.DuplicateRequestException;
+import com.google.gson.Gson;
 
 import java.util.LinkedList;
 
@@ -176,61 +176,41 @@ public class Office {
                 this.email);
     }
 
-    public Office(int type, String data) {
+    public Office(String data) {
 
-        /*
-        type == 1 -> CSV
-        type == 2 -> JSON
-        type == 3 -> XML
-         */
+        //IMPORT CSV
+        String[] lines = data.split("\n");
+        String[] attributes = data.split(";");
 
-        if (type == 1) {
+        if (attributes[0].equals("Oficina")) {
 
-            //IMPORT CSV
-            String[] lines = data.split("\n");
-            String[] attributes = data.split(";");
-
-            if (attributes[0].equals("Oficina")) {
-
-                this.id = attributes[1];
-                this.name = attributes[2];
-                this.address = attributes[3];
-                this.city = attributes[4];
-                this.postcode = attributes[5];
-                this.phoneNumber = attributes[6];
-                this.email = attributes[7];
-
-            } else {
-
-                return;
-
-            }
-
-            //Clientes
-
-            this.clients = new LinkedList<>();
-
-            String[] csvClients = data.split("Cliente");
-            String csvClient;
-
-            for (int i = 0; i < csvClients.length; i++) {
-
-                csvClient = "Cliente" + csvClients[i];
-                Client client = new Client(1, csvClient);
-                clients.add(client);
-
-            }
-
-        } else if (type == 2) {
-
-            //IMPORT JSON
-
-        } else if (type == 3) {
-
-            //IMPORT XML
+            this.id = attributes[1];
+            this.name = attributes[2];
+            this.address = attributes[3];
+            this.city = attributes[4];
+            this.postcode = attributes[5];
+            this.phoneNumber = attributes[6];
+            this.email = attributes[7];
 
         } else {
-            throw new IllegalArgumentException("El tipo no es válido...");
+
+            return;
+
+        }
+
+        //Clientes
+
+        this.clients = new LinkedList<>();
+
+        String[] csvClients = data.split("Cliente");
+        String csvClient;
+
+        for (int i = 0; i < csvClients.length; i++) {
+
+            csvClient = "Cliente" + csvClients[i];
+            Client client = new Client(csvClient);
+            clients.add(client);
+
         }
 
     }
@@ -240,13 +220,13 @@ public class Office {
         StringBuilder csv;
 
         csv = new StringBuilder(String.format("Oficina;" +
-                        "%10s;" +
-                        "%10s;" +
-                        "%10s;" +
-                        "%10s;" +
-                        "%10s;" +
-                        "%10s;" +
-                        "%10s\n",
+                        "%s;" +
+                        "%s;" +
+                        "%s;" +
+                        "%s;" +
+                        "%s;" +
+                        "%s;" +
+                        "%s\n",
                 this.id,
                 this.name,
                 this.address,

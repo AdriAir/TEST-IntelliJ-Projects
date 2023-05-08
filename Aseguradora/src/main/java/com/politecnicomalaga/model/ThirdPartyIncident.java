@@ -1,4 +1,4 @@
-package com.politecnicomalaga.modelo;
+package com.politecnicomalaga.model;
 
 public class ThirdPartyIncident extends Incident {
 
@@ -17,33 +17,14 @@ public class ThirdPartyIncident extends Incident {
 
     }
 
-    public ThirdPartyIncident(int type, String data) {
-        super(type, data);
-        /*
-        type == 1 -> CSV
-        type == 2 -> JSON
-        type == 3 -> XML
-         */
+    public ThirdPartyIncident(String data) {
+        super(data);
 
-        if (type == 1) {
+        //IMPORT CSV
+        String[] attributes = data.split(";");
 
-            //IMPORT CSV
-            String[] attributes = data.split(";");
-
-            if (attributes[0].equals("Incidencia")) {
-                this.thirdPartyDriverDni = attributes[7];
-            }
-
-        } else if (type == 2) {
-
-            //IMPORT JSON
-
-        } else if (type == 3) {
-
-            //IMPORT XML
-
-        } else {
-            throw new IllegalArgumentException("El tipo no es válido...");
+        if (attributes[7].equals("Incidencia Ajena")) {
+            this.thirdPartyDriverDni = attributes[8];
         }
 
     }
@@ -72,13 +53,14 @@ public class ThirdPartyIncident extends Incident {
         String csv;
 
         csv = String.format("Incidencia;" +
-                        "%10s;" +
-                        "%10s;" +
-                        "%10s;" +
-                        "%10s;" +
-                        "%10s;" +
-                        "%20s;" +
-                        "%10s\n",
+                        "%s;" +
+                        "%s;" +
+                        "%s;" +
+                        "%s;" +
+                        "%s;" +
+                        "%s;" +
+                        "Incidencia Ajena;" +
+                        "%s\n",
                 super.date,
                 super.timeHours,
                 super.id,

@@ -1,4 +1,6 @@
-package com.politecnicomalaga.modelo;
+package com.politecnicomalaga.model;
+
+import com.google.gson.Gson;
 
 public class Incident {
     protected String date;
@@ -27,38 +29,18 @@ public class Incident {
         this.isActive = true;
     }
 
-    public Incident(int type, String data) {
+    public Incident(String data) {
 
-        /*
-        type == 1 -> CSV
-        type == 2 -> JSON
-        type == 3 -> XML
-         */
+        //IMPORT CSV
+        String[] attributes = data.split(";");
 
-        if (type == 1) {
-
-            //IMPORT CSV
-            String[] attributes = data.split(";");
-
-            if (attributes[0].equals("Incidencia")) {
-                this.date = attributes[1];
-                this.timeHours = attributes[2];
-                this.id = attributes[3];
-                this.ownVehicle = attributes[4];
-                this.thirdPartyVehicle = attributes[5];
-                this.description = attributes[6];
-            }
-
-        } else if (type == 2) {
-
-            //IMPORT JSON
-
-        } else if (type == 3) {
-
-            //IMPORT XML
-
-        } else {
-            throw new IllegalArgumentException("El tipo no es válido...");
+        if (attributes[0].equals("Incidencia")) {
+            this.date = attributes[1];
+            this.timeHours = attributes[2];
+            this.id = attributes[3];
+            this.ownVehicle = attributes[4];
+            this.thirdPartyVehicle = attributes[5];
+            this.description = attributes[6];
         }
 
     }
@@ -103,12 +85,12 @@ public class Incident {
         String csv;
 
         csv = String.format("Incidencia;" +
-                        "%10s;" +
-                        "%10s;" +
-                        "%10s;" +
-                        "%10s;" +
-                        "%10s;" +
-                        "%20s\n",
+                        "%s;" +
+                        "%s;" +
+                        "%s;" +
+                        "%s;" +
+                        "%s;" +
+                        "%s\n",
                 this.date,
                 this.timeHours,
                 this.id,
@@ -117,16 +99,6 @@ public class Incident {
                 this.description);
 
         return csv;
-    }
-
-    public String toJSON() {
-
-        return "";
-
-    }
-
-    public String toXML() {
-        return "";
     }
 
 }
