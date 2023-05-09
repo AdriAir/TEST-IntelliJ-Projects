@@ -39,14 +39,10 @@ public class Client {
     }
 
     public Client(String csv) {
-
-
         //IMPORT CSV
         String[] lines = csv.split("\n");
-        String[] attributes = csv.split(";");
-
+        String[] attributes = lines[0].split(";");
         if (attributes[0].equals("Cliente")) {
-
             this.dni = attributes[1];
             this.idPolicy = attributes[2];
             this.name = attributes[3];
@@ -54,23 +50,15 @@ public class Client {
             this.address = attributes[5];
             this.email = attributes[6];
             this.phoneNumber = attributes[7];
-
         } else {
-
             return;
-
         }
-
         //Incidencias
         incidents = new LinkedList<>();
-
         for (int i = 1; i < lines.length; i++) {
-
             Incident incident = new Incident(lines[i]);
             this.incidents.add(incident);
-
         }
-
     }
 
     //Setters
@@ -105,11 +93,9 @@ public class Client {
         for (Incident incident : this.incidents) {
 
             if (incident.isActive) {
-
                 isRemovable = false;
                 break;
             }
-
         }
 
         return isRemovable;
@@ -232,11 +218,8 @@ public class Client {
                 this.phoneNumber));
 
         for (Incident incident : incidents) {
-
             csv.append(incident.toCSV());
-
         }
-
         return csv.toString();
     }
 }

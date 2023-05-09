@@ -30,7 +30,7 @@ public class Office {
 
         //IMPORT CSV
         String[] lines = data.split("\n");
-        String[] attributes = data.split(";");
+        String[] attributes = lines[0].split(";");
 
         if (attributes[0].equals("Oficina")) {
 

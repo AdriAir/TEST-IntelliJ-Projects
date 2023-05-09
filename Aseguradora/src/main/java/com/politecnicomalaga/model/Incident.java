@@ -31,10 +31,8 @@ public class Incident {
     }
 
     public Incident(String csv) {
-
         //IMPORT CSV
         String[] attributes = csv.split(";");
-
         if (attributes[0].equals("Incidencia")) {
             this.date = attributes[1];
             this.timeHours = attributes[2];
@@ -43,7 +41,6 @@ public class Incident {
             this.thirdPartyVehicle = attributes[5];
             this.description = attributes[6];
         }
-
     }
     //Setters
 
@@ -82,9 +79,7 @@ public class Incident {
     }
 
     public String toCSV() {
-
         String csv;
-
         csv = String.format("Incidencia;" +
                         "%s;" +
                         "%s;" +
@@ -98,8 +93,6 @@ public class Incident {
                 this.ownVehicle,
                 this.thirdPartyVehicle,
                 this.description);
-
         return csv;
     }
-
 }
