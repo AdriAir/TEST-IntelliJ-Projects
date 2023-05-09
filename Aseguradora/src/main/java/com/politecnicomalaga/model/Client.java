@@ -116,14 +116,13 @@ public class Client {
 
     }
 
-    public void addIncident(Incident newIncident) {
+    public void addIncident(Incident newIncident) throws IllegalArgumentException {
 
         boolean isIn = false;
 
         for (Incident incident : this.incidents) {
             if (incident.getId().equals(newIncident.getId())) {
-                isIn = true;
-                break;
+                throw new IllegalArgumentException("La incidencia ya existe...");
             }
         }
 

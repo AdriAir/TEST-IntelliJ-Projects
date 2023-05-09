@@ -4,6 +4,8 @@ import com.politecnicomalaga.controller.FileController;
 import com.politecnicomalaga.model.Client;
 import com.politecnicomalaga.model.Incident;
 import com.politecnicomalaga.model.Office;
+
+import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -562,7 +564,7 @@ public class MainLauncher {
                         try {
                             System.out.print("Introuduce la ruta del nuevo archivo: ");
                             path = scanner.nextLine();
-                            FileController.writeJSON(office, path);
+                            FileController.writeJson(office, path);
                             System.out.println("Se ha exportado la oficina...");
                             exit = true;
                         } catch (IOException ioException) {
@@ -576,11 +578,11 @@ public class MainLauncher {
                         try {
                             System.out.print("Introuduce la ruta del nuevo archivo: ");
                             path = scanner.nextLine();
-                            FileController.writeJSON(office, path);
+                            FileController.writeXML(office, path);
                             System.out.println("Se ha exportado la oficina...");
                             exit = true;
-                        } catch (IOException ioException) {
-                            System.out.println("No se ha encontrado el archivo");
+                        } catch (JAXBException e) {
+                            System.out.println("Error con el XML");
                         }
                     } while (!exit);
                     exit = false;

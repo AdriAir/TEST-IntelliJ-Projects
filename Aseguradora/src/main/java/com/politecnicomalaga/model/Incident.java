@@ -3,6 +3,7 @@ package com.politecnicomalaga.model;
 import com.google.gson.Gson;
 
 public class Incident {
+    public static int policyNumber = 0;
     protected String date;
     protected String timeHours;
     protected String id;
@@ -12,19 +13,18 @@ public class Incident {
 
     protected boolean isActive;
     protected String policyId;
-    protected int policyNumber;
 
     //Constructor
-    public Incident(String date, String timeHours, String policyId, int policyNumber, String ownVehicle, String thirdPartyVehicle, String description) {
+    public Incident(String date, String timeHours, String policyId, String ownVehicle, String thirdPartyVehicle, String description) {
         this.date = date;
         this.timeHours = timeHours;
         this.ownVehicle = ownVehicle;
         this.thirdPartyVehicle = thirdPartyVehicle;
         this.description = description;
         this.policyId = policyId;
-        this.policyNumber = policyNumber;
+        Incident.policyNumber++;
 
-        this.id = this.policyId + "-" + this.policyNumber;
+        this.id = this.policyId + "-" + Incident.policyNumber;
 
         this.isActive = true;
     }

@@ -67,7 +67,7 @@ public class FileController {
     }
 
     //JSON
-    public static void writeJSON(Object object, String path) throws IOException {
+    public static void writeJson(Object object, String path) throws IOException {
         writeText(new Gson().toJson(object), path);
     }
 
