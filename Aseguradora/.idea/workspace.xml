@@ -5,8 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d2f5b443-2c9c-4588-8215-39a726c9a3c9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/oficina.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/politecnicomalaga/docs/oficina.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/politecnicomalaga/view/oficina.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/politecnicomalaga/view/oficina.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/politecnicomalaga/model/Incident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/politecnicomalaga/model/Incident.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/politecnicomalaga/model/Office.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/politecnicomalaga/model/Office.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/politecnicomalaga/view/MainLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/politecnicomalaga/view/MainLauncher.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,5 +87,16 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/politecnicomalaga/controller/FileController.java</url>
+          <line>17</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

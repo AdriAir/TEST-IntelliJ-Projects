@@ -53,7 +53,7 @@ public class MainLauncher {
 
         //Objects
         Scanner scanner = new Scanner(System.in);
-        Office office = null;
+        Office office;
         Client client;
         Incident incident;
 
@@ -68,6 +68,7 @@ public class MainLauncher {
                     "Su opción: ");
             try {
                 menu = scanner.nextInt();
+                scanner = fflush(scanner);
 
                 if (menu < 1 || menu > 2) {
                     System.out.println("Introduzca un valor válido...");
@@ -89,24 +90,32 @@ public class MainLauncher {
 
                     System.out.print("Introduzca el código de la oficina: ");
                     officeCode = scanner.nextLine();
+                    scanner = fflush(scanner);
 
                     System.out.print("Introduzca el nombre de la oficina: ");
                     officeName = scanner.nextLine();
+                    scanner = fflush(scanner);
+
 
                     System.out.print("Introduzca la dirección de la oficina: ");
                     officeAddress = scanner.nextLine();
+                    scanner = fflush(scanner);
 
                     System.out.print("Introduzca la ciudad de la oficina: ");
                     officeCity = scanner.nextLine();
+                    scanner = fflush(scanner);
 
                     System.out.print("Introduzca el CP de la oficina: ");
                     officePostCode = scanner.nextLine();
+                    scanner = fflush(scanner);
 
                     System.out.print("Introduzca el teléfono de la oficina: ");
                     officePhoneNumber = scanner.nextLine();
+                    scanner = fflush(scanner);
 
                     System.out.print("Introduzca el email de la oficina: ");
                     officeEmail = scanner.nextLine();
+                    scanner = fflush(scanner);
 
                     office = new Office(officeCode,
                             officeName,
@@ -141,6 +150,7 @@ public class MainLauncher {
                 try {
 
                     menu = scanner.nextInt();
+                    scanner = fflush(scanner);
 
                     if (menu < 1 || menu > 3) {
 
@@ -165,6 +175,7 @@ public class MainLauncher {
                     try {
                         System.out.print("Introuduce la ruta del CSV: ");
                         path = scanner.nextLine();
+                        scanner = fflush(scanner);
                         csv = FileController.readText(path);
                         office = new Office(csv);
                         System.out.println("Se ha importado la oficina...");
@@ -195,6 +206,7 @@ public class MainLauncher {
                     try {
                         System.out.print("Introuduce la ruta del XML: ");
                         path = scanner.nextLine();
+                        scanner = fflush(scanner);
                         xml = FileController.readText(path);
                         office = (Office) FileController.readXML(xml, office);
                         System.out.println("Se ha importado la oficina...");
@@ -222,6 +234,7 @@ public class MainLauncher {
 
                 try {
                     menu = scanner.nextInt();
+                    scanner = fflush(scanner);
 
                     if (menu < 1 || menu > 3) {
 
@@ -247,24 +260,31 @@ public class MainLauncher {
 
                         System.out.print("Introduzca el DNI del cliente: ");
                         clientDni = scanner.nextLine();
+                        scanner = fflush(scanner);
 
                         System.out.print("Introduzca el nombre del cliente: ");
                         clientName = scanner.nextLine();
+                        scanner = fflush(scanner);
 
                         System.out.print("Introduzca los apellidos del cliente: ");
                         clientLastName = scanner.nextLine();
+                        scanner = fflush(scanner);
 
                         System.out.print("Introduzca la dirección postal del cliente: ");
                         clientAddress = scanner.nextLine();
+                        scanner = fflush(scanner);
 
                         System.out.print("Introduzca el teléfono del cliente:  ");
                         clientPhoneNumber = scanner.nextLine();
+                        scanner = fflush(scanner);
 
                         System.out.print("Introduzca el email del cliente: ");
                         clientEmail = scanner.nextLine();
+                        scanner = fflush(scanner);
 
                         System.out.print("Introduzca código de la póliza del cliente: ");
                         clientIdPolicy = scanner.nextLine();
+                        scanner = fflush(scanner);
 
                         client = new Client(clientDni,
                                 clientIdPolicy,
@@ -306,6 +326,7 @@ public class MainLauncher {
                     try {
 
                         menu = scanner.nextInt();
+                        scanner = fflush(scanner);
 
                         if (menu < 1 || menu > 3) {
 
@@ -342,6 +363,7 @@ public class MainLauncher {
                             }
 
                             menu = scanner.nextInt();
+                            scanner = fflush(scanner);
 
                             if (menu < 1 || menu > office.listClients().length + 1) {
 
@@ -372,6 +394,7 @@ public class MainLauncher {
 
                             System.out.println("Introduzca el DNI del cliente: ");
                             clientDni = scanner.nextLine();
+                            scanner = fflush(scanner);
 
                             if (office.searchClientByDNI(clientDni) != null) {
 
@@ -403,6 +426,7 @@ public class MainLauncher {
 
                             System.out.println("Introduzca el/los apellidos a filtrar: ");
                             clientLastName = scanner.nextLine();
+                            scanner = fflush(scanner);
 
                             if (office.searchClientByLastName(clientLastName) != null) {
 
@@ -414,6 +438,7 @@ public class MainLauncher {
                                 }
 
                                 menu = scanner.nextInt();
+                                scanner = fflush(scanner);
 
                                 if (menu < 1 | menu > office.searchClientByLastName(clientLastName).length + 1) {
 
@@ -440,6 +465,8 @@ public class MainLauncher {
                     } while (!exit);
                 }
 
+                exit = false;
+
                 //GESTIONAR CLIENTE
                 do {
 
@@ -457,6 +484,7 @@ public class MainLauncher {
                     try {
 
                         menu = scanner.nextInt();
+                        scanner = fflush(scanner);
 
                         if (menu < 1 || menu > 5) {
 
@@ -478,38 +506,6 @@ public class MainLauncher {
                 exit = false;
 
             } else {
-
-                //Exportar Oficina
-                do {
-                    System.out.print("---------------------\n" +
-                            "GUARDAR OFICINA\n" +
-                            "---------------------\n" +
-                            "1. GUARDAR EN CSV\n" +
-                            "2. GUARDAR EN JSON\n" +
-                            "3. GUARDAR EN XML\n" +
-                            "---------------------\n" +
-                            "Su opción: ");
-
-                    try {
-                        menu = scanner.nextInt();
-
-                        if (menu < 1 || menu > 3) {
-
-                            System.out.println("Introduzca un valor válido...");
-
-                        } else {
-
-                            exit = true;
-
-                        }
-
-                    } catch (InputMismatchException inputMismatchException) {
-                        System.out.println("Porfavor, introduzca un número...");
-                    }
-                } while (!exit);
-
-                exit = false;
-
                 //Export Office
                 do {
                     System.out.print("---------------------\n" +
@@ -524,6 +520,7 @@ public class MainLauncher {
                     try {
 
                         menu = scanner.nextInt();
+                        scanner = fflush(scanner);
 
                         if (menu < 1 || menu > 3) {
 
@@ -548,6 +545,7 @@ public class MainLauncher {
                         try {
                             System.out.print("Introuduce la ruta del nuevo archivo: ");
                             path = scanner.nextLine();
+                            scanner = fflush(scanner);
                             csv = office.toCSV();
                             FileController.writeText(csv, path);
                             System.out.println("Se ha exportado la oficina...");
@@ -563,6 +561,7 @@ public class MainLauncher {
                         try {
                             System.out.print("Introuduce la ruta del nuevo archivo: ");
                             path = scanner.nextLine();
+                            scanner = fflush(scanner);
                             FileController.writeJson(office, path);
                             System.out.println("Se ha exportado la oficina...");
                             exit = true;
@@ -577,6 +576,7 @@ public class MainLauncher {
                         try {
                             System.out.print("Introuduce la ruta del nuevo archivo: ");
                             path = scanner.nextLine();
+                            scanner = fflush(scanner);
                             FileController.writeXML(office, path);
                             System.out.println("Se ha exportado la oficina...");
                             exit = true;
@@ -590,6 +590,11 @@ public class MainLauncher {
 
         } while (!exit);
 
+    }
+
+    public static Scanner fflush(Scanner scanner) {
+        scanner = new Scanner(System.in);
+        return scanner;
     }
 
 }

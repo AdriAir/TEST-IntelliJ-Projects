@@ -1,7 +1,5 @@
 package com.politecnicomalaga.model;
 
-import com.google.gson.Gson;
-
 public class Incident {
     public static int policyNumber = 0;
     protected String date;
@@ -16,7 +14,7 @@ public class Incident {
 
 
     //Constructor
-    public Incident(String date, String timeHours, String policyId, String ownVehicle, String thirdPartyVehicle, String description) {
+    public Incident(String date, String timeHours, String policyId, int policyNumber, String ownVehicle, String thirdPartyVehicle, String description) {
         this.date = date;
         this.timeHours = timeHours;
         this.ownVehicle = ownVehicle;

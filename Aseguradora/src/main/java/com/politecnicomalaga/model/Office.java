@@ -26,6 +26,7 @@ public class Office {
 
         this.clients = new LinkedList<>();
     }
+
     public Office(String csv) {
         //IMPORT CSV
         String[] lines = csv.split("\n");
