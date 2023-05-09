@@ -26,14 +26,11 @@ public class Office {
 
         this.clients = new LinkedList<>();
     }
-    public Office(String data) {
-
+    public Office(String csv) {
         //IMPORT CSV
-        String[] lines = data.split("\n");
+        String[] lines = csv.split("\n");
         String[] attributes = lines[0].split(";");
-
         if (attributes[0].equals("Oficina")) {
-
             this.id = attributes[1];
             this.name = attributes[2];
             this.address = attributes[3];
@@ -41,28 +38,18 @@ public class Office {
             this.postcode = attributes[5];
             this.phoneNumber = attributes[6];
             this.email = attributes[7];
-
         } else {
-
             return;
-
         }
-
         //Clientes
-
         this.clients = new LinkedList<>();
-
-        String[] csvClients = data.split("Cliente");
+        String[] csvClients = csv.split("Cliente");
         String csvClient;
-
-        for (String sClient : csvClients) {
-
-            csvClient = "Cliente" + sClient;
+        for (int i = 1; i < csvClients.length; i++) {
+            csvClient = "Cliente" + csvClients[i];
             Client client = new Client(csvClient);
             clients.add(client);
-
         }
-
     }
 
     //Setters
