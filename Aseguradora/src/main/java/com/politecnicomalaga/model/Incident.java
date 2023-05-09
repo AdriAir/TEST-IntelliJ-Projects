@@ -14,6 +14,7 @@ public class Incident {
     protected boolean isActive;
     protected String policyId;
 
+
     //Constructor
     public Incident(String date, String timeHours, String policyId, String ownVehicle, String thirdPartyVehicle, String description) {
         this.date = date;
