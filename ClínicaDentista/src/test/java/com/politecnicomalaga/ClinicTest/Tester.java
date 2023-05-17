@@ -2,48 +2,70 @@ package com.politecnicomalaga.ClinicTest;
 
 import com.politecnicomalaga.model.Clinic;
 import com.politecnicomalaga.model.Patient;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;
 
 public class Tester {
 
-    @BeforeAll
-    public static void setUp() throws Exception {
-        Clinic miClinica = new Clinic("clinica", "address", "phoneNumber", "email", "cif");
-    }
+    private static Clinic clinic = new Clinic("clinica", "address", "phoneNumber", "email", "cif");
+    private static int patientNumber = 500;
 
     @Test
     public void addPatient() throws Exception {
-        Clinic miClinica = new Clinic("clinica", "address", "phoneNumber", "email", "cif");
-        assertNull(miClinica.getPatients());
-        for (int i = 0; i < 500; i++) {
-            miClinica.addPatient(new Patient("name", "surname", "phone_number", "email", String.valueOf(i), "bornDate"));
+        for (int i = 0; i < patientNumber; i++) {
+            clinic.addPatient(new Patient("name", "surname", "phone_number", "email", String.valueOf(i), "bornDate"));
         }
-        assertEquals(500, miClinica.getPatients().length);
+        assertEquals(patientNumber, clinic.getPatients().length);
     }
 
     @Test
     public void removePatient() {
-        Clinic miCLinica= new Clinic("clinica", "address","phoneNumber","email", "cif");
-        miCLinica.addPatient(new Patient("name","surname", "phone_number", "email", "1", "bornDate"));
-        miCLinica.removePatient("1");
+        clinic.addPatient(new Patient("name", "surname", "phone_number", "email", "0", "bornDate"));
+        clinic.removePatient("0");
+        assertNull(clinic.getPatients());
+        clinic.addPatient(new Patient("name", "surname", "phone_number", "email", "0", "bornDate"));
+        clinic.addPatient(new Patient("name", "surname", "phone_number", "email", "1", "bornDate"));
+        clinic.removePatient("0");
+        assertEquals(1, clinic.getPatients().length);
     }
 
-    @org.junit.Test
+    @Test
     public void searchPatients() {
+        for (int i = 0; i < patientNumber; i++) {
+            clinic.addPatient(new Patient("name", "surname", "phone_number", "email", String.valueOf(i), "bornDate"));
+        }
+        assertEquals(1, clinic.searchPatients("1", Patient.patientAttributes.DNI).length);
+        assertEquals(patientNumber, clinic.searchPatients("na", Patient.patientAttributes.NAME).length);
     }
 
-    @org.junit.Test
+    @Test
     public void getPatient() {
+        for (int i = 0; i < patientNumber; i++) {
+            clinic.addPatient(new Patient("name", "surname", "phone_number", "email", String.valueOf(i), "bornDate"));
+        }
+        assertTrue(clinic.getPatient("2").getDni().equals("2"));
     }
 
-    @org.junit.Test
+    @Test
     public void getPatients() {
+        for (int i = 0; i < patientNumber; i++) {
+            clinic.addPatient(new Patient("name", "surname", "phone_number", "email", String.valueOf(i), "bornDate"));
+        }
+        assertEquals(500, clinic.getPatients().length);
     }
 
-    @org.junit.Test
+    @Test
     public void updatePatient() {
+        for (int i = 0; i < patientNumber; i++) {
+            clinic.addPatient(new Patient("name", "surname", "phone_number", "email", String.valueOf(i), "bornDate"));
+        }
+        clinic.updatePatient("5", "928", Patient.patientAttributes.DNI);
+        assertEquals("928", clinic.getPatient("928").getDni());
+        clinic.updatePatient("3", "Manu", Patient.patientAttributes.NAME);
+        assertEquals("Manu", clinic.getPatient("3").getName());
+
     }
 }
