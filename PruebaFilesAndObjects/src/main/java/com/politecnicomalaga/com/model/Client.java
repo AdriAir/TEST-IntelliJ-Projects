@@ -1,4 +1,4 @@
-package com.politecnicomalaga.model;
+package com.politecnicomalaga.com.model;
 
 import java.util.LinkedList;
 

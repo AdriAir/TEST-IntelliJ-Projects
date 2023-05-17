@@ -1,4 +1,4 @@
-package com.politecnicomalaga.model;
+package com.politecnicomalaga.com.model;
 
 import com.google.gson.Gson;
 
@@ -172,6 +172,7 @@ public class Office {
 
     public Client[] listClients() {
 
+
         Client[] clients = new Client[this.clients.size()];
 
         for (int i = 0; i < this.clients.size(); i++) {
@@ -181,6 +182,7 @@ public class Office {
         }
 
         return clients;
+
 
     }
 

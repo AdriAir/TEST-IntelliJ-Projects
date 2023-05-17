@@ -1,4 +1,4 @@
-package com.politecnicomalaga.model;
+package com.politecnicomalaga.com.model;
 
 public class Incident {
     public static int policyNumber = 0;

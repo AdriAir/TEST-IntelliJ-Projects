@@ -1,12 +1,10 @@
 //MUST ADD TO GRADLE/MAVEN GSON AND JAXB LIBS
 
-package com.politecnicomalaga.controller;
+package com.politecnicomalaga.com;
 
 import com.google.gson.Gson;
+import com.politecnicomalaga.com.model.Office;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import java.io.*;
 import java.util.Scanner;
 
@@ -56,23 +54,13 @@ public class FileController {
         return text.toString();
     }
 
-    //XML
-    public static void writeXML(Object object, String path) throws JAXBException {
-        Marshaller marshaller = JAXBContext.newInstance(object.getClass()).createMarshaller();
-        marshaller.marshal(object, new File(path));
-    }
-
-    public static Object readXML(String xml, Object object) {
-        return new Gson().fromJson(xml, object.getClass());
-    }
-
     //JSON
     public static void writeJson(Object object, String path) throws IOException {
         writeText(new Gson().toJson(object), path);
     }
 
-    public static Object readJson(String json, Object object) {
-        return new Gson().fromJson(json, object.getClass());
+    public static Office readJson(String json) {
+        return new Gson().fromJson(json, Office.class);
     }
 
     //BINARY
@@ -112,4 +100,5 @@ public class FileController {
         }
         return text.toString();
     }
+
 }
