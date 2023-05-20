@@ -1,14 +1,12 @@
-package com.politecnicomalaga.ClinicTest;
+package com.politecnicomalaga.tests;
 
 import com.politecnicomalaga.model.Clinic;
 import com.politecnicomalaga.model.Patient;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;
 
-public class Tester {
+public class TestClinic {
 
     private static Clinic clinic = new Clinic("clinica", "address", "phoneNumber", "email", "cif");
     private static int patientNumber = 500;
@@ -66,6 +64,5 @@ public class Tester {
         assertEquals("928", clinic.getPatient("928").getDni());
         clinic.updatePatient("3", "Manu", Patient.patientAttributes.NAME);
         assertEquals("Manu", clinic.getPatient("3").getName());
-
     }
 }
